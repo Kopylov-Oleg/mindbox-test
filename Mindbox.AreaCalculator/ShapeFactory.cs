@@ -33,8 +33,8 @@ namespace Mindbox.AreaCalculator
         {
             return shapeType switch
             {
-                ShapeType.Circle => new Circle(arguments.First()), // возможно, нужна обработка числа параметров != 1                    
-                ShapeType.Polygon => new Polygon(arguments),
+                ShapeType.Circle => CreateCircle(arguments.First()), // возможно, нужна обработка числа параметров != 1                    
+                ShapeType.Polygon => CreatePolygon(arguments),
                 _ => throw new NotImplementedException(),
             };
         }

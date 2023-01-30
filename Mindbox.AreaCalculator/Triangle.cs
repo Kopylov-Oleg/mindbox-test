@@ -49,7 +49,7 @@ namespace Mindbox.AreaCalculator
         {
             if (IsRightAngled())
             {
-                return Edges[0] * Edges[1];
+                return Edges[0] * Edges[1] / 2;
             }
 
             // это можно сделать циклами, но ухудшается читаемость, не видно формулу
