@@ -16,6 +16,12 @@ namespace Mindbox.AreaCalculator
 
         internal Polygon(IEnumerable<double> edges)
         {
+            if(!IsCorrectPolygon(edges))
+            {
+                throw new ArgumentException(String.Format("{0} do not make a polygon", nameof(edges)),
+                                      nameof(edges));
+            }
+
             Edges = edges.ToList();
         }
 
@@ -30,6 +36,21 @@ namespace Mindbox.AreaCalculator
             // Не требуется в тестовом задании, недостаточно знать только стороны,
             //  нужны углы (или, возможно, лучше координаты)
             throw new NotImplementedException();
+        }
+
+        protected static bool IsCorrectPolygon(IEnumerable<double> edges)
+        {
+            if(!edges.All(x => x > 0))
+            {
+                return false;
+            }
+
+            var edgesSum = edges.Sum(x => x);
+            var maxEdge = edges.Max(x => x);
+
+            // В многоугольнике длина наибольшей стороны должна быть меньше,
+            //  чем сумма всех других сторон
+            return (edgesSum - maxEdge) > maxEdge;
         }
     }
 }

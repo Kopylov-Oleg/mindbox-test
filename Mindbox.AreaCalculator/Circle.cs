@@ -9,6 +9,11 @@ namespace Mindbox.AreaCalculator
     {
         internal Circle(double radius) 
         {
+            if(!IsCorrectCircle(radius))
+            {
+                throw new ArgumentException(String.Format("{0} does not make a circle", nameof(radius)),
+                                      nameof(radius));
+            }
             Radius = radius;
         }
 
@@ -27,5 +32,8 @@ namespace Mindbox.AreaCalculator
 
         protected override double CalculateArea()
             => Math.PI * Radius * Radius;
+
+        protected static bool IsCorrectCircle(double radius) 
+            => radius > 0;
     }
 }
